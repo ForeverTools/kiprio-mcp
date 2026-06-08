@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "kiprio-mcp": {
+      "command": "uvx",
+      "args": ["kiprio-mcp"],
+      "env": {
+        "KIPRIO_API_KEY": ""
+      }
+    }
+  }
+}
