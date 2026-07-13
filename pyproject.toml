@@ -4,19 +4,52 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kiprio-mcp"
-version = "0.2.1"
+version = "0.2.2"
 description = "MCP server for kiprio.com — 23 production API tools for Claude, Cursor, and any MCP client"
 authors = [{name = "ForeverTools", email = "theworkshop@kiprio.com"}]
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.10"
-keywords = ["mcp", "api", "developer-tools", "claude", "ai"]
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "cursor",
+    "windsurf",
+    "ai",
+    "llm",
+    "ai-tools",
+    "developer-tools",
+    "api-tools",
+    "email-validation",
+    "dns-lookup",
+    "ssl-check",
+    "web-scraping",
+    "nlp",
+    "validate-email",
+    "whois",
+    "ip-lookup",
+    "sentiment-analysis",
+    "text-processing",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Utilities",
+    "Topic :: Text Processing",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Communications :: Email",
+    "Topic :: System :: Networking :: Monitoring",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
 ]
 dependencies = [
     "mcp>=1.0.0",
