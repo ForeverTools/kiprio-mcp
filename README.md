@@ -1,8 +1,10 @@
 # kiprio MCP Server
 
 [![PyPI](https://img.shields.io/pypi/v/kiprio-mcp)](https://pypi.org/project/kiprio-mcp/)
+[![Downloads](https://img.shields.io/pypi/dm/kiprio-mcp)](https://pypi.org/project/kiprio-mcp/)
 [![Python](https://img.shields.io/pypi/pyversions/kiprio-mcp)](https://pypi.org/project/kiprio-mcp/)
 [![License](https://img.shields.io/github/license/ForeverTools/kiprio-mcp)](LICENSE)
+[![MCP Compatible](https://img.shields.io/badge/MCP-compatible-blue)](https://modelcontextprotocol.io)
 
 **23 production APIs in one MCP package** — email validation, DNS/WHOIS, SSL inspection, web scraping, NLP, and developer utilities — usable by Claude, Cursor, Windsurf, and any [Model Context Protocol](https://modelcontextprotocol.io) client.
 
