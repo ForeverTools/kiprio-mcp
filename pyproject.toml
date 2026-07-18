@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kiprio-mcp"
-version = "0.2.9"
+version = "0.3.0"
 description = "23 production API tools as a Claude MCP server — email validation, DNS, web scraping, NLP, and more. Works with Claude Code, Claude Desktop, Cursor, and any MCP client."
 authors = [{name = "ForeverTools", email = "theworkshop@kiprio.com"}]
 license = {text = "MIT"}
