@@ -4,16 +4,21 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kiprio-mcp"
-version = "0.2.5"
-description = "MCP server for kiprio.com — 23 production API tools for Claude, Cursor, and any MCP client"
+version = "0.2.7"
+description = "23 production API tools as a Claude MCP server — email validation, DNS, web scraping, NLP, and more. Works with Claude Code, Claude Desktop, Cursor, and any MCP client."
 authors = [{name = "ForeverTools", email = "theworkshop@kiprio.com"}]
-license = "MIT"
+license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = [
     "mcp",
+    "mcp-server",
+    "mcp-tools",
     "model-context-protocol",
     "claude",
+    "claude-code",
+    "claude-desktop",
+    "anthropic",
     "cursor",
     "windsurf",
     "ai",
