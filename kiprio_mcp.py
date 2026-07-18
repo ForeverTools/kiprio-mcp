@@ -53,9 +53,11 @@ def _get(path: str, **params) -> dict:
             follow_redirects=True,
         )
         if r.status_code in (401, 403):
-            return {"error": "API key required or daily limit reached. Get a free key at https://kiprio.com/signup?ref=kiprio-mcp"}
+            return {"error": "API key required or daily limit reached. Get a free key (100 req/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp"}
         if r.status_code == 429:
-            return {"error": "Rate limit exceeded. Upgrade at https://kiprio.com/pricing"}
+            if not API_KEY:
+                return {"error": "Daily limit reached (30 req/day without key). Get a free key (100/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp — takes 30 seconds, no credit card."}
+            return {"error": "Daily rate limit reached. Upgrade your plan at https://kiprio.com/pricing?ref=kiprio-mcp"}
         r.raise_for_status()
         return r.json()
     except httpx.ConnectError:
@@ -74,9 +76,11 @@ def _post(path: str, body: dict) -> dict:
     try:
         r = httpx.post(url, json=body, headers=_headers(), timeout=30)
         if r.status_code in (401, 403):
-            return {"error": "API key required or daily limit reached. Get a free key at https://kiprio.com/signup?ref=kiprio-mcp"}
+            return {"error": "API key required or daily limit reached. Get a free key (100 req/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp"}
         if r.status_code == 429:
-            return {"error": "Rate limit exceeded. Upgrade at https://kiprio.com/pricing"}
+            if not API_KEY:
+                return {"error": "Daily limit reached (30 req/day without key). Get a free key (100/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp — takes 30 seconds, no credit card."}
+            return {"error": "Daily rate limit reached. Upgrade your plan at https://kiprio.com/pricing?ref=kiprio-mcp"}
         r.raise_for_status()
         return r.json()
     except httpx.ConnectError:
