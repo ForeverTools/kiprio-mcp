@@ -44,7 +44,7 @@ The anonymous tier is rate-limited to **30 requests/day per tool** — fine for 
 
 **A free registered key gives you 100 req/day per tool at zero cost:**
 
-👉 **[kiprio.com/signup](https://kiprio.com/signup)** — no credit card, no trial period.
+👉 **[kiprio.com/signup](https://kiprio.com/signup?ref=kiprio-mcp)** — no credit card, no trial period.
 
 ---
 
@@ -156,13 +156,13 @@ These patterns work within the free key tier (100 req/day per tool). Pro tier (1
 | Tier | Limit | Cost |
 |------|-------|------|
 | Anonymous (no key) | **30 req/day/tool** | $0 |
-| **Free key** | **100 req/day/tool** | **$0** — [sign up](https://kiprio.com/signup) |
+| **Free key** | **100 req/day/tool** | **$0** — [sign up](https://kiprio.com/signup?ref=kiprio-mcp) |
 | **Pro** | **1,000 req/day/tool** | **$9/mo** |
 | Business | 10,000 req/day/tool | $39/mo |
 
 **Free key vs anonymous:** Same tools, 3× the headroom, still $0. Just needs an email address.
 
-[Get your free key at kiprio.com/signup →](https://kiprio.com/signup)
+[Get your free key at kiprio.com/signup →](https://kiprio.com/signup?ref=kiprio-mcp)
 
 ### When to upgrade to Pro
 
@@ -209,7 +209,7 @@ Then reference in your MCP config:
 "command": "/path/to/venv/bin/kiprio-mcp"
 ```
 
-**`429 Rate limit exceeded`** — free anonymous tier hit. Register at [kiprio.com/signup](https://kiprio.com/signup) for 100 req/day free, or [upgrade to Pro](https://kiprio.com/products/mcp-server/) for 1,000/day.
+**`429 Rate limit exceeded`** — free anonymous tier hit. Register at [kiprio.com/signup](https://kiprio.com/signup?ref=kiprio-mcp) for 100 req/day free, or [upgrade to Pro](https://kiprio.com/products/mcp-server/) for 1,000/day.
 
 **`401/403 errors`** — API key invalid. Leave `KIPRIO_API_KEY` empty to use the anonymous tier (30 req/day).
 
