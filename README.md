@@ -6,9 +6,9 @@
 [![License](https://img.shields.io/github/license/ForeverTools/kiprio-mcp)](LICENSE)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-blue)](https://modelcontextprotocol.io)
 
-**23 production APIs in one MCP package** — email validation, DNS/WHOIS, SSL inspection, web scraping, NLP, and developer utilities — usable by Claude, Cursor, Windsurf, and any [Model Context Protocol](https://modelcontextprotocol.io) client.
+**23 production API tools for Claude Code, Claude Desktop, Cursor, and any [MCP](https://modelcontextprotocol.io) client** — email validation, DNS/WHOIS, SSL inspection, web scraping, NLP, and developer utilities.
 
-No third-party API keys required. Free tier included.
+No third-party API keys required. Free tier included. Powered by [kiprio.com](https://kiprio.com).
 
 ---
 
@@ -18,47 +18,88 @@ No third-party API keys required. Free tier included.
 pip install kiprio-mcp
 ```
 
-Add to your MCP client config:
+**Claude Code** — add to your project in one step:
+
+```bash
+claude mcp add kiprio -- kiprio-mcp
+```
+
+Or add to `~/.claude.json` / Cursor / Windsurf:
 
 ```json
 {
   "mcpServers": {
     "kiprio": {
       "command": "kiprio-mcp",
-      "env": {"KIPRIO_API_KEY": ""}
+      "env": {"KIPRIO_API_KEY": "your_key_here"}
     }
   }
 }
 ```
 
-**Claude Code** — run once in your project:
+### Get your free API key (takes 30 seconds)
 
-```bash
-claude mcp add kiprio -- kiprio-mcp
-```
+The anonymous tier is rate-limited to **30 requests/day per tool** — fine for one-off queries, but it runs out fast in any automated workflow.
 
-Free tier works without a key. Get a free key for higher limits at [kiprio.com/docs](https://kiprio.com/docs/).
+**A free registered key gives you 100 req/day per tool at zero cost:**
+
+👉 **[kiprio.com/signup](https://kiprio.com/signup)** — no credit card, no trial period.
 
 ---
 
 ## What you can do
 
-Once connected, ask Claude things like:
+Once connected, ask Claude naturally:
 
-> *"Is noreply@company.io a real email address?"*
+> *"Is noreply@company.io a real deliverable address?"*
 > → `validate_email` checks syntax, MX records, and disposable domain lists
 
 > *"What tech stack is stripe.com running?"*
 > → `tech_stack` returns CMS, CDN, analytics, and payment providers
 
-> *"Take a screenshot of this URL and describe what you see."*
-> → `screenshot_url` returns a base64 PNG Claude can analyse visually
+> *"Take a screenshot of this landing page and flag any broken layout."*
+> → `screenshot_url` returns a base64 PNG Claude can analyse directly
 
-> *"Redact all personal information from this support transcript."*
+> *"Redact all PII from this support transcript before I send it to Zendesk."*
 > → `redact_text` replaces emails, phones, names, and card numbers with `[REDACTED_TYPE]`
 
-> *"Is this EU VAT number valid? GB123456789"*
-> → `validate_vat` verifies via VIES and returns the registered company name
+> *"Check the SSL certificate on api.example.com — is it expiring soon?"*
+> → `ssl_check` returns expiry date, issuer, and grade
+
+---
+
+## Building an automated agent?
+
+kiprio tools are designed for pipelines and hooks, not just one-shot queries. Common patterns:
+
+**Email validation before accepting signups:**
+```
+User submits email
+→ Claude: validate_email("user@example.com")
+→ If disposable/invalid → reject early, before DB write
+```
+
+**Domain monitoring hook (Claude Code slash command):**
+```bash
+# Add to CLAUDE.md as a custom slash command
+/check-ssl  →  ssl_check on all domains in config/domains.txt
+```
+
+**Lead enrichment agent:**
+```
+CSV of company domains
+→ Claude loops: tech_stack() + whois_lookup() + ip_lookup() per row
+→ Output: enriched CSV with stack, registrar, country, hosting provider
+```
+
+**Content moderation pipeline:**
+```
+User-submitted text
+→ sentiment_analysis() to flag negative
+→ redact_text() to strip PII before logging
+```
+
+These patterns work within the free key tier (100 req/day per tool). Pro tier (1,000/day) handles larger batches.
 
 ---
 
@@ -113,40 +154,63 @@ Once connected, ask Claude things like:
 
 | Tier | Limit | Cost |
 |------|-------|------|
-| Free (no key) | 30 requests/day/tool | $0 |
-| Free (with key) | 100 requests/day/tool | $0 |
-| Pro | 1,000 requests/day/tool | from $9/mo |
-| Business | 10,000 requests/day/tool | from $39/mo |
+| Anonymous (no key) | **30 req/day/tool** | $0 |
+| **Free key** | **100 req/day/tool** | **$0** — [sign up](https://kiprio.com/signup) |
+| **Pro** | **1,000 req/day/tool** | **$9/mo** |
+| Business | 10,000 req/day/tool | $39/mo |
 
-Get a free key and manage usage at [kiprio.com/docs](https://kiprio.com/docs/).
+**Free key vs anonymous:** Same tools, 3× the headroom, still $0. Just needs an email address.
+
+[Get your free key at kiprio.com/signup →](https://kiprio.com/signup)
+
+### When to upgrade to Pro
+
+- **Batch processing** — validating 500 emails, enriching a CSV, running a link audit
+- **Scheduled agents** — Claude Code hooks that fire on every commit or cron job
+- **Team workspaces** — multiple developers sharing one config
+- **Production scripts** — slash commands that run on every file save or PR
+
+[Upgrade to Pro at kiprio.com →](https://kiprio.com/products/mcp-server/)
 
 ---
 
 ## Claude Code setup
 
 ```bash
-# Install and register in one step
 pip install kiprio-mcp
 claude mcp add kiprio -- kiprio-mcp
-
-# Verify it's connected
-claude mcp list
+claude mcp list   # should show kiprio
 ```
 
-Or add `KIPRIO_API_KEY=your_key` to a `.env` and reference it in your MCP config.
+With API key in your project `.env`:
+```bash
+echo "KIPRIO_API_KEY=your_key" >> .env
+```
+
+Then reference in your MCP config:
+```json
+{
+  "mcpServers": {
+    "kiprio": {
+      "command": "kiprio-mcp",
+      "env": {"KIPRIO_API_KEY": "${KIPRIO_API_KEY}"}
+    }
+  }
+}
+```
 
 ---
 
 ## Troubleshooting
 
-**`kiprio-mcp: command not found`** — your virtualenv's `bin/` isn't on PATH. Use the full path:
+**`kiprio-mcp: command not found`** — use the full path from your virtualenv:
 ```json
 "command": "/path/to/venv/bin/kiprio-mcp"
 ```
 
-**`429 Rate limit exceeded`** — you've hit the free tier daily cap. Get a free key at [kiprio.com/docs](https://kiprio.com/docs/) to raise the limit to 100/day, or upgrade to Pro.
+**`429 Rate limit exceeded`** — free anonymous tier hit. Register at [kiprio.com/signup](https://kiprio.com/signup) for 100 req/day free, or [upgrade to Pro](https://kiprio.com/products/mcp-server/) for 1,000/day.
 
-**`401/403 errors`** — your API key is invalid. Leave `KIPRIO_API_KEY` empty to use the anonymous free tier.
+**`401/403 errors`** — API key invalid. Leave `KIPRIO_API_KEY` empty to use the anonymous tier (30 req/day).
 
 ---
 
