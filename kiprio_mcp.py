@@ -15,17 +15,23 @@ Or in claude_desktop_config.json / mcp config:
     }
 
 Free tier works without an API key for demo-rate-limited endpoints.
-Get a free key at https://kiprio.com/docs/
+Get a free key at https://kiprio.com/v1/mcp-registry/register/
 """
 from __future__ import annotations
 
 import base64
 import os
+import sys
 import httpx
 from mcp.server.fastmcp import FastMCP
 
 BASE = "https://kiprio.com/v1"
 API_KEY = os.environ.get("KIPRIO_API_KEY", "")
+
+if not API_KEY:
+    sys.stderr.write(
+        "kiprio MCP: running in demo mode (rate-limited). Sign up free at https://kiprio.com/v1/mcp-registry/register/\n"
+    )
 
 mcp = FastMCP("kiprio")
 
@@ -46,7 +52,7 @@ def _get(path: str, **params) -> dict:
         follow_redirects=True,
     )
     if r.status_code in (401, 403):
-        return {"error": "API key required or rate limit reached. Get a free key at https://kiprio.com/docs/"}
+        return {"error": "API key required or rate limit reached. Get a free key at https://kiprio.com/v1/mcp-registry/register/"}
     if r.status_code == 429:
         return {"error": "Rate limit exceeded. Upgrade at https://kiprio.com/pricing"}
     r.raise_for_status()
@@ -58,7 +64,7 @@ def _post(path: str, body: dict) -> dict:
     url = f"{BASE}{path}" if path.endswith("/") else f"{BASE}{path}/"
     r = httpx.post(url, json=body, headers=_headers(), timeout=30)
     if r.status_code in (401, 403):
-        return {"error": "API key required or rate limit reached. Get a free key at https://kiprio.com/docs/"}
+        return {"error": "API key required or rate limit reached. Get a free key at https://kiprio.com/v1/mcp-registry/register/"}
     if r.status_code == 429:
         return {"error": "Rate limit exceeded. Upgrade at https://kiprio.com/pricing"}
     r.raise_for_status()
@@ -131,7 +137,7 @@ def screenshot_url(url: str, width: int = 1280, height: int = 800, full_page: bo
         timeout=60,
     )
     if r.status_code in (401, 403):
-        return {"error": "API key required or rate limit reached. Get a free key at https://kiprio.com/docs/"}
+        return {"error": "API key required or rate limit reached. Get a free key at https://kiprio.com/v1/mcp-registry/register/"}
     if r.status_code == 429:
         return {"error": "Rate limit exceeded. Upgrade at https://kiprio.com/pricing"}
     r.raise_for_status()
