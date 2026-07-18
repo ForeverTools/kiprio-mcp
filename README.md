@@ -1,3 +1,4 @@
+<!-- mcp-name: com.kiprio/kiprio-mcp -->
 # kiprio MCP Server
 
 [![PyPI](https://img.shields.io/pypi/v/kiprio-mcp)](https://pypi.org/project/kiprio-mcp/)
