@@ -14,7 +14,7 @@ Or in claude_desktop_config.json / mcp config:
     }
 
 Free tier works without an API key (30 requests/day per tool, rate-limited).
-Get a free key (100 req/day) at https://kiprio.com/signup
+Get a free key (100 req/day) at https://kiprio.com/signup?ref=kiprio-mcp
 """
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ API_KEY = os.environ.get("KIPRIO_API_KEY", "")
 if not API_KEY:
     sys.stderr.write(
         "kiprio MCP: running in demo mode (30 req/day per tool). "
-        "Get a free key at https://kiprio.com/signup\n"
+        "Get a free key at https://kiprio.com/signup?ref=kiprio-mcp\n"
     )
 
 mcp = FastMCP("kiprio")
@@ -53,7 +53,7 @@ def _get(path: str, **params) -> dict:
             follow_redirects=True,
         )
         if r.status_code in (401, 403):
-            return {"error": "API key required or daily limit reached. Get a free key at https://kiprio.com/signup"}
+            return {"error": "API key required or daily limit reached. Get a free key at https://kiprio.com/signup?ref=kiprio-mcp"}
         if r.status_code == 429:
             return {"error": "Rate limit exceeded. Upgrade at https://kiprio.com/pricing"}
         r.raise_for_status()
@@ -74,7 +74,7 @@ def _post(path: str, body: dict) -> dict:
     try:
         r = httpx.post(url, json=body, headers=_headers(), timeout=30)
         if r.status_code in (401, 403):
-            return {"error": "API key required or daily limit reached. Get a free key at https://kiprio.com/signup"}
+            return {"error": "API key required or daily limit reached. Get a free key at https://kiprio.com/signup?ref=kiprio-mcp"}
         if r.status_code == 429:
             return {"error": "Rate limit exceeded. Upgrade at https://kiprio.com/pricing"}
         r.raise_for_status()
@@ -258,7 +258,7 @@ def screenshot_url(url: str, width: int = 1280, height: int = 800, full_page: bo
             timeout=60,
         )
         if r.status_code in (401, 403):
-            return {"error": "API key required or daily limit reached. Get a free key at https://kiprio.com/signup"}
+            return {"error": "API key required or daily limit reached. Get a free key at https://kiprio.com/signup?ref=kiprio-mcp"}
         if r.status_code == 429:
             return {"error": "Rate limit exceeded. Upgrade at https://kiprio.com/pricing"}
         r.raise_for_status()
