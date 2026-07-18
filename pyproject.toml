@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kiprio-mcp"
-version = "0.2.2"
+version = "0.2.5"
 description = "MCP server for kiprio.com — 23 production API tools for Claude, Cursor, and any MCP client"
 authors = [{name = "ForeverTools", email = "theworkshop@kiprio.com"}]
 license = "MIT"
