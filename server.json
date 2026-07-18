@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.kiprio/kiprio-mcp",
+  "title": "Kiprio MCP Server",
+  "description": "23 API tools for Claude Code — email, DNS, SSL, NLP, scraping. Free tier included.",
+  "repository": {
+    "url": "https://github.com/ForeverTools/kiprio-mcp",
+    "source": "github"
+  },
+  "version": "0.2.8",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "kiprio-mcp",
+      "version": "0.2.8",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "Optional Kiprio API key for higher rate limits. Free tier works without a key.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true,
+          "name": "KIPRIO_API_KEY"
+        }
+      ]
+    }
+  ]
+}
