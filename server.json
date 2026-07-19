@@ -7,12 +7,12 @@
     "url": "https://github.com/ForeverTools/kiprio-mcp",
     "source": "github"
   },
-  "version": "0.2.8",
+  "version": "0.3.0",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "kiprio-mcp",
-      "version": "0.2.8",
+      "version": "0.3.0",
       "transport": {
         "type": "stdio"
       },
