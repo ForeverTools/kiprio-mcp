@@ -67,7 +67,7 @@ Or add to `~/.claude.json` / Claude Desktop / Cursor / Windsurf / Zed:
 
 ### Get your free API key (takes 30 seconds)
 
-The anonymous tier is rate-limited to **30 requests/day per tool** — fine for one-off queries, but it runs out fast in any automated workflow.
+The anonymous tier is rate-limited to **50–100 requests/day per tool** — fine for one-off queries, but it runs out fast in any automated workflow.
 
 **A free registered key gives you 100 req/day per tool at zero cost:**
 
@@ -182,7 +182,7 @@ These patterns work within the free key tier (100 req/day per tool). Pro tier (1
 
 | Tier | Limit | Cost |
 |------|-------|------|
-| Anonymous (no key) | **30 req/day/tool** | $0 |
+| Anonymous (no key) | **50–100 req/day/tool** | $0 |
 | **Free key** | **100 req/day/tool** | **$0** — [sign up](https://kiprio.com/signup?ref=kiprio-mcp) |
 | **Pro** | **1,000 req/day/tool** | **$9/mo** |
 | Business | 10,000 req/day/tool | $39/mo |

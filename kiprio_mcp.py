@@ -13,7 +13,7 @@ Or in claude_desktop_config.json / mcp config:
       }
     }
 
-Free tier works without an API key (30 requests/day per tool, rate-limited).
+Free tier works without an API key (50-100 requests/day per tool, rate-limited).
 Get a free key (100 req/day) at https://kiprio.com/signup?ref=kiprio-mcp
 """
 from __future__ import annotations
@@ -29,7 +29,7 @@ API_KEY = os.environ.get("KIPRIO_API_KEY", "")
 
 if not API_KEY:
     sys.stderr.write(
-        "kiprio MCP: running in demo mode (30 req/day per tool). "
+        "kiprio MCP: running in demo mode (50-100 req/day per tool). "
         "Get a free key at https://kiprio.com/signup?ref=kiprio-mcp\n"
     )
 
@@ -56,7 +56,7 @@ def _get(path: str, **params) -> dict:
             return {"error": "API key required or daily limit reached. Get a free key (100 req/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp"}
         if r.status_code == 429:
             if not API_KEY:
-                return {"error": "Daily limit reached (30 req/day without key). Get a free key (100/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp — takes 30 seconds, no credit card."}
+                return {"error": "Daily limit reached (50-100 req/day without key). Get a free key (100/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp — takes 30 seconds, no credit card."}
             return {"error": "Daily rate limit reached. Upgrade your plan at https://kiprio.com/pricing?ref=kiprio-mcp"}
         r.raise_for_status()
         return r.json()
@@ -79,7 +79,7 @@ def _post(path: str, body: dict) -> dict:
             return {"error": "API key required or daily limit reached. Get a free key (100 req/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp"}
         if r.status_code == 429:
             if not API_KEY:
-                return {"error": "Daily limit reached (30 req/day without key). Get a free key (100/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp — takes 30 seconds, no credit card."}
+                return {"error": "Daily limit reached (50-100 req/day without key). Get a free key (100/day, $0) at https://kiprio.com/signup?ref=kiprio-mcp — takes 30 seconds, no credit card."}
             return {"error": "Daily rate limit reached. Upgrade your plan at https://kiprio.com/pricing?ref=kiprio-mcp"}
         r.raise_for_status()
         return r.json()
