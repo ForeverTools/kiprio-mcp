@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/github/license/ForeverTools/kiprio-mcp)](LICENSE)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-blue)](https://modelcontextprotocol.io)
 
-**23 production API tools for Claude Code, Claude Desktop, Cursor, and any [MCP](https://modelcontextprotocol.io) client** — email validation, DNS/WHOIS, SSL inspection, web scraping, NLP, and developer utilities.
+**23 production API tools for Claude Code, Claude Desktop, Cursor, Cline, Continue, and any [MCP](https://modelcontextprotocol.io) client** — email validation, DNS/WHOIS, SSL inspection, web scraping, NLP, and developer utilities.
 
 No third-party API keys required. Free tier included. Powered by [kiprio.com](https://kiprio.com).
 
@@ -25,7 +25,7 @@ pip install kiprio-mcp
 claude mcp add kiprio -- kiprio-mcp
 ```
 
-Or add to `~/.claude.json` / Cursor / Windsurf:
+Or add to `~/.claude.json` / Claude Desktop / Cursor / Windsurf / Zed:
 
 ```json
 {
@@ -35,6 +35,33 @@ Or add to `~/.claude.json` / Cursor / Windsurf:
       "env": {"KIPRIO_API_KEY": "your_key_here"}
     }
   }
+}
+```
+
+**Cline (VS Code)** — open Cline → MCP Servers → Add Server → paste:
+
+```json
+{
+  "mcpServers": {
+    "kiprio": {
+      "command": "kiprio-mcp",
+      "env": {"KIPRIO_API_KEY": "your_key_here"}
+    }
+  }
+}
+```
+
+**Continue.dev** — add to `~/.continue/config.json` under `mcpServers`:
+
+```json
+{
+  "mcpServers": [
+    {
+      "name": "kiprio",
+      "command": "kiprio-mcp",
+      "env": {"KIPRIO_API_KEY": "your_key_here"}
+    }
+  ]
 }
 ```
 
