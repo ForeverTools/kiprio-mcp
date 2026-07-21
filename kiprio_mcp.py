@@ -84,9 +84,10 @@ def _get(path: str, demo_path: str | None = None, **params) -> dict:
         return {"error": f"Unexpected error: {type(exc).__name__}: {exc}"}
 
 
-def _post(path: str, body: dict) -> dict:
+def _post(path: str, body: dict, demo_path: str | None = None) -> dict:
+    effective_path = demo_path if (not API_KEY and demo_path is not None) else path
     # Trailing slash avoids 301 redirect that would convert POST→GET and lose the body
-    url = f"{BASE}{path}" if path.endswith("/") else f"{BASE}{path}/"
+    url = f"{BASE}{effective_path}" if effective_path.endswith("/") else f"{BASE}{effective_path}/"
     try:
         r = httpx.post(url, json=body, headers=_headers(), timeout=30)
         if r.status_code in (401, 403, 429):
@@ -332,7 +333,7 @@ def tech_stack(url: str) -> dict:
             confidence: Detection confidence 0.0–1.0.
             version: Version string if detectable (may be null).
     """
-    return _get("/tech-stack", url=url)
+    return _get("/tech-stack", demo_path="/tech-stack/demo", url=url)
 
 
 @mcp.tool()
@@ -387,7 +388,7 @@ def sentiment_analysis(text: str) -> dict:
         negative: Proportion of negative signal in the text.
         neutral: Proportion of neutral signal in the text.
     """
-    return _post("/sentiment", {"text": text})
+    return _post("/sentiment", {"text": text}, demo_path="/sentiment/demo")
 
 
 @mcp.tool()
@@ -443,7 +444,7 @@ def translate_text(text: str, target: str, source: str = "auto") -> dict:
         target_language: Target language code.
         confidence: Source language detection confidence (0.0–1.0).
     """
-    return _post("/translate", {"text": text, "to": target, "from": source})
+    return {"error": "Translation API has been discontinued. See https://kiprio.com/products/ for available APIs."}
 
 
 @mcp.tool()
