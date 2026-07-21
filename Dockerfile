@@ -4,7 +4,7 @@
 FROM python:3.11-slim
 
 # Install from PyPI — matches the production package users install via pip/uvx.
-RUN pip install --no-cache-dir kiprio-mcp==0.3.3
+RUN pip install --no-cache-dir "kiprio-mcp==0.3.3"
 
 # Free tier works without a key; clients can override at runtime.
 ENV KIPRIO_API_KEY=""
