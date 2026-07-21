@@ -60,10 +60,11 @@ def _limit_error(r: httpx.Response) -> dict:
     return {"error": f"API key required or daily limit reached. Get a free key (100 req/day, $0) at {url}"}
 
 
-def _get(path: str, **params) -> dict:
+def _get(path: str, demo_path: str | None = None, **params) -> dict:
+    effective_path = demo_path if (not API_KEY and demo_path is not None) else path
     try:
         r = httpx.get(
-            f"{BASE}{path}",
+            f"{BASE}{effective_path}",
             params={k: v for k, v in params.items() if v is not None},
             headers=_headers(),
             timeout=30,
@@ -152,7 +153,7 @@ def dns_lookup(domain: str, record_types: str = "A") -> dict:
         records: List of DNS records, each with type, value, and ttl.
         query_time_ms: How long the DNS resolution took.
     """
-    return _get("/dns-lookup", domain=domain, types=record_types)
+    return _get("/dns-lookup", demo_path="/dns-lookup/demo", domain=domain, types=record_types)
 
 
 @mcp.tool()
@@ -178,7 +179,7 @@ def whois_lookup(domain: str) -> dict:
         status: EPP status codes (e.g. clientTransferProhibited).
         registrant: Registrant contact (may be redacted under GDPR).
     """
-    return _get("/whois", domain=domain)
+    return _get("/whois", demo_path="/whois/demo", domain=domain)
 
 
 @mcp.tool()
@@ -206,7 +207,7 @@ def ssl_check(host: str) -> dict:
         sans: List of Subject Alternative Names (all covered hostnames).
         chain_length: Number of certificates in the chain.
     """
-    return _get("/ssl-check", host=host)
+    return _get("/ssl/", demo_path="/ssl/demo", domain=host)
 
 
 @mcp.tool()
