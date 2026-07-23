@@ -6,6 +6,8 @@
 [![Python](https://img.shields.io/pypi/pyversions/kiprio-mcp)](https://pypi.org/project/kiprio-mcp/)
 [![License](https://img.shields.io/github/license/ForeverTools/kiprio-mcp)](LICENSE)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-blue)](https://modelcontextprotocol.io)
+[![Stars](https://img.shields.io/github/stars/ForeverTools/kiprio-mcp?style=social)](https://github.com/ForeverTools/kiprio-mcp)
+[![Glama](https://glama.ai/mcp/servers/ForeverTools/kiprio-mcp/badges/score.svg)](https://glama.ai/mcp/servers/ForeverTools/kiprio-mcp)
 
 **23 production API tools for Claude Code, Claude Desktop, Cursor, Cline, Continue, and any [MCP](https://modelcontextprotocol.io) client** — email validation, DNS/WHOIS, SSL inspection, web scraping, NLP, and developer utilities.
 
